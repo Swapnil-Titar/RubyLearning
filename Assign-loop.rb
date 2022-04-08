@@ -206,7 +206,208 @@ capitalize("jane") # prints "Jane"
 # block that capitalizes each string in the array
 ["ryan", "jane"].each {|string| puts "#{string[0].upcase}#{string[1..-1]}"} # prints "Ryan", then "Jane"
 
+# prints the item. 
+[1, 2, 3, 4, 5].each { |i| puts i }
+
+# This block prints the number 5 for each item.
+# (It chooses to ignore the passed item, which is allowed.)
+[1, 2, 3, 4, 5].each { |i| puts 5*i}
+
+# library sorting code
+books = ["Charlie and the Chocolate Factory", "War and Peace", "Utopia", "A Brief History of Time", "A Wrinkle in Time"]
+
+# How might we sort! the books in alphabetical order? (Hint, hint)
+
+puts books.sort!
 
 
+def alphabetize(arr, rev=false)
+    if rev
+      arr.sort { |item1, item2| item2 <=> item1 }
+    else
+      arr.sort { |item1, item2| item1 <=> item2 }
+    end
+  end
+  
+  books = ["Heart of Darkness", "Code Complete", "The Lorax", "The Prophet", "Absalom, Absalom!"]
+  
+  puts "A-Z: #{alphabetize(books)}"
+  puts "Z-A: #{alphabetize(books, true)}"
 
+
+def alphabetize(arr, rev = false)
+    arr.sort!
+  end
+  
+  numbers = [3, 5, 1, 6]
+
+  puts alphabetize(numbers)
+
+
+  def alphabetize(arr, rev = false)
+    arr.sort!
+    if rev == true
+     puts arr.reverse!
+    else
+     arr
+  end
+  end
+  numbers = [3, 5, 1, 6]
+  
+  puts alphabetize(numbers)
+
+
+#Sample hash symbols 
+# Write your code below!
+my_first_symbol = :monkey
+symbol_hash = {
+  :cat => "meow",
+  :dog => "woof",
+  :comp => 01010101
+}
+
+
+strings = ["HTML", "CSS", "JavaScript", "Python", "Ruby"]
+
+# Add your code below!
+
+symbols = []
+strings.each do |s|
+  symbols.push(s.to_sym)
+  end
+  puts symbols
+
+# with to_sym or .intern
+strings = ["HTML", "CSS", "JavaScript", "Python", "Ruby"]
+
+# Add your code below!
+
+symbols = []
+strings.each do |s|
+  symbols.push(s.intern)
+  end
+  puts symbols
+
+
+movies = {
+ RRR: "9.0",
+ Push_the_fire: "8.7",
+ KGF2: "9.5" 
+} 
+
+  movies = {
+    :RRR => "9.0",
+    :Push_the_fire => "8.7",
+    :KGF2 => "9.5" 
+   }
+
+
+   require 'benchmark'
+
+   string_AZ = Hash[("a".."z").to_a.zip((1..26).to_a)]
+   symbol_AZ = Hash[(:a..:z).to_a.zip((1..26).to_a)]
+   
+   string_time = Benchmark.realtime do
+     100_000.times { string_AZ["r"] }
+   end
+   
+   symbol_time = Benchmark.realtime do
+     100_000.times { symbol_AZ[:r] }
+   end
+   
+   puts "String time: #{string_time} seconds."
+   puts "Symbol time: #{symbol_time} seconds."
+
+
+# how to use select method on hash to get peticular value or attributes
+movie_ratings = {
+    memento: 3,
+    primer: 3.5,
+    the_matrix: 5,
+    truman_show: 4,
+    red_dawn: 1.5,
+    skyfall: 4,
+    alex_cross: 2,
+    uhf: 1,
+    lion_king: 3.5
+  }
+  # Add your code below!
+  good_movies = movie_ratings.select {|k,v| v > 3}
+  puts good_movies
+  
+  matrix_movie = movie_ratings.select{|name,grade| name == :the_matrix}
+  puts matrix_movie
+ # for printing specific keys and its values 
+movie_ratings = {
+  memento: 3,
+  primer: 3.5,
+  the_matrix: 3,
+  truman_show: 4,
+  red_dawn: 1.5,
+  skyfall: 4,
+  alex_cross: 2,
+  uhf: 1,
+  lion_king: 3.5
+}
+# Add your code below!
+movie_ratings.each_key {|k| puts k}
+movie_ratings.each_value {|k| puts k}
 =end
+
+# assignment on movies database = crud
+movies = {
+    Memento: 3,
+    Primer: 4,
+    Ishtar: 1
+  }
+  
+  puts "What would you like to do?"
+  puts "-- Type 'add' to add a movie."
+  puts "-- Type 'update' to update a movie."
+  puts "-- Type 'display' to display all movies."
+  puts "-- Type 'delete' to delete a movie."
+  
+  choice = gets.chomp.downcase
+  case choice
+  when 'add'
+    puts "What movie do you want to add?"
+    title = gets.chomp
+    if movies[title.to_sym].nil?
+      puts "What's the rating? (Type a number 0 to 4.)"
+      rating = gets.chomp
+      movies[title.to_sym] = rating.to_i
+      puts "#{title} has been added with a rating of #{rating}."
+    else
+      puts "That movie already exists! Its rating is #{movies[title.to_sym]}."
+    end
+  when 'update'
+    puts "What movie do you want to update?"
+    title = gets.chomp
+    if movies[title.to_sym].nil?
+      puts "Movie not found!"
+    else
+      puts "What's the new rating? (Type a number 0 to 4.)"
+      rating = gets.chomp
+      movies[title.to_sym] = rating.to_i
+      puts "#{title} has been updated with new rating of #{rating}."
+    end
+  when 'display'
+    movies.each do |movie, rating|
+      puts "#{movie}: #{rating}"
+    end
+  when 'delete'
+    puts "What movie do you want to delete?"
+    title = gets.chomp
+    if movies[title.to_sym].nil?
+      puts "Movie not found!"
+    else
+      movies.delete(title.to_sym)
+      puts "#{title} has been removed."
+    end
+  else
+    puts "Sorry, I didn't understand you."
+  end
+
+
+
+
